@@ -1,0 +1,8 @@
+{
+  "name": "Agelga",
+  "description": "Agelga e uma plataforma digital moderna para gestao simples, rapida e segura de investimentos. Oferece planos de investimento, acompanhamento de rendimentos e transacoes em tempo real.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
