@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agelga – Plataforma de Investimento Digital</title>
+    <!-- Tailwind CSS para Estilização Eficiente -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fontes Modernas -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col">
+
+    <!-- Sistema de Notificações (Toast) -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Header / Navegação Principal -->
+    <header class="bg-white border-b border-slate-100 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+                <div class="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-lg font-display">A</div>
+                <span class="text-xl font-bold font-display text-slate-900 tracking-tight">Agelga</span>
+            </div>
+            
+            <nav id="nav-visitor" class="hidden md:flex items-center gap-6">
+                <a href="#how-it-works" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition" onclick="showView('home')">Como Funciona</a>
+                <a href="#plans" class="text-sm font-medium text-slate-600 hover:text-emerald-600 transition" onclick="showView('home')">Planos</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <div id="auth-buttons" class="flex gap-2">
+                    <button onclick="showView('login')" class="px-4 h-10 border border-slate-200 text-sm font-medium rounded-lg text-slate-700 hover:bg-slate-50 transition">Entrar</button>
+                    <button onclick="showView('register')" class="px-4 h-10 bg-emerald-600 text-sm font-medium rounded-lg text-white hover:bg-emerald-700 transition">Registar</button>
+                </div>
+                <div id="user-profile" class="hidden flex items-center gap-3">
+                    <span id="user-display-name" class="text-sm font-semibold text-slate-700">Utilizador</span>
+                    <button onclick="handleLogout()" class="px-3 py-1.5 border border-red-200 text-xs font-medium rounded-md text-red-600 hover:bg-red-50 transition">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ÁREA DE CONTEÚDO DINÂMICA (SPA Simulado via JS) -->
+    <main class="flex-grow">
+
+        <!-- 1. LANDING PAGE -->
+        <section id="view-home" class="view-section">
+            <!-- Hero Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 mb-6">
+                    ⚡ Nova Era de Investimentos Digitais
+                </span>
+                <h1 class="text-4xl md:text-6xl font-bold font-display text-slate-900 tracking-tight max-w-3xl mx-auto leading-tight">
+                    O caminho mais simples para multiplicar seu <span class="text-emerald-600">Património</span>
+                </h1>
+                <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">
+                    A Agelga é a plataforma intuitiva que liga você a planos de rendimentos otimizados, depósitos seguros e levantamentos descomplicados.
+                </p>
+                <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <button onclick="showView('register')" class="px-8 py-3.5 bg-emerald-600 text-white font-medium rounded-xl hover:bg-emerald-700 transition">Começar Agora</button>
+                    <button onclick="showView('login')" class="px-8 py-3.5 bg-white border border-slate-200 text-slate-700 font-medium rounded-xl hover:bg-slate-50 transition">Ver Painel</button>
+                </div>
+            </div>
+
+            <!-- Seção de Planos -->
+            <div id="plans" class="bg-slate-100/50 py-16 border-y border-slate-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold font-display text-slate-900">Planos de Mineração Ativos</h2>
+                        <p class="text-slate-600 mt-2">Escolha o plano ideal para o seu perfil de investimento</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Plano Bronze -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div>
+                                <span class="bg-yellow-50 text-yellow-700 text-xs font-semibold px-2.5 py-1 rounded-md">Bronze</span>
+                                <h3 class="text-lg font-bold mt-4 text-slate-950">Plano Inicial</h3>
+                                <p class="text-3xl font-bold font-display text-slate-900 mt-2">€50 <span class="text-sm font-normal text-slate-500">/investimento</span></p>
+                                <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-center gap-2">✔ Rendimento diário de 1.8%</li>
+                                    <li class="flex items-center gap-2">✔ Ciclo de 30 dias de duração</li>
+                                    <li class="flex items-center gap-2">✔ Levantamentos imediatos</li>
+                                </ul>
+                            </div>
+                            <button onclick="showView('login')" class="mt-8 w-full py-2.5 bg-emerald-600 text-white font-semibold rounded-lg text-sm hover:bg-emerald-700 transition">Investir</button>
+                        </div>
+                        <!-- Plano Prata -->
+                        <div class="bg-white rounded-2xl p-6 border-2 border-emerald-500/60 shadow-md relative overflow-hidden flex flex-col justify-between">
+                            <div class="absolute top-0 right-0 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-wider">Mais Popular</div>
+                            <div>
+                                <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-md">Prata</span>
+                                <h3 class="text-lg font-bold mt-4 text-slate-950">Plano Moderado</h3>
+                                <p class="text-3xl font-bold font-display text-slate-900 mt-2">€250 <span class="text-sm font-normal text-slate-500">/investimento</span></p>
+                                <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-center gap-2">✔ Rendimento diário de 2.2%</li>
+                                    <li class="flex items-center gap-2">✔ Ciclo de 30 dias de duração</li>
+                                    <li class="flex items-center gap-2">✔ Suporte prioritário 24/7</li>
+                                </ul>
+                            </div>
+                            <button onclick="showView('login')" class="mt-8 w-full py-2.5 bg-emerald-600 text-white font-semibold rounded-lg text-sm hover:bg-emerald-700 transition">Investir</button>
+                        </div>
+                        <!-- Plano Ouro -->
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200/60 shadow-sm relative overflow-hidden flex flex-col justify-between">
+                            <div>
+                                <span class="bg-amber-50 text-amber-700 text-xs font-semibold px-2.5 py-1 rounded-md">Ouro</span>
+                                <h3 class="text-lg font-bold mt-4 text-slate-950">Plano Elite</h3>
+                                <p class="text-3xl font-bold font-display text-slate-900 mt-2">€1,000 <span class="text-sm font-normal text-slate-500">/investimento</span></p>
+                                <ul class="mt-6 space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-center gap-2">✔ Rendimento diário de 2.7%</li>
+                                    <li class="flex items-center gap-2">✔ Ciclo de 45 dias de duração</li>
+                                    <li class="flex items-center gap-2">✔ Gestor de conta dedicado</li>
+                                </ul>
+                            </div>
+                            <button onclick="showView('login')" class="mt-8 w-full py-2.5 bg-emerald-600 text-white font-semibold rounded-lg text-sm hover:bg-emerald-700 transition">Investir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. LOGIN FORM -->
+        <section id="view-login" class="view-section hidden py-16">
+            <div class="max-w-md mx-auto bg-white rounded-2xl p-8 border border-slate-200/60 shadow-md">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold font-display text-slate-900">Bem-vindo de volta</h2>
+                    <p class="text-slate-550 text-sm mt-1">Insira os seus dados de acesso</p>
+                </div>
+                <form onsubmit="handleLogin(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Endereço de Email</label>
+                        <input id="login-email" type="email" placeholder="exemplo@email.com" required class="w-full h-11 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Palavra-passe</label>
+                        <input id="login-password" type="password" placeholder="••••••••" required class="w-full h-11 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <button type="submit" class="w-full h-11 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition mt-6">Entrar na Conta</button>
+                </form>
+                <p class="text-center mt-6 text-sm text-slate-600">
+                    Ainda não tem conta? <a href="#" onclick="showView('register')" class="text-emerald-600 font-medium hover:underline">Registe-se aqui</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. REGISTER FORM -->
+        <section id="view-register" class="view-section hidden py-16">
+            <div class="max-w-md mx-auto bg-white rounded-2xl p-8 border border-slate-200/60 shadow-md">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold font-display text-slate-900">Crie a sua Conta</h2>
+                    <p class="text-slate-550 text-sm mt-1">Comece a investir em instantes</p>
+                </div>
+                <form onsubmit="handleRegister(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Nome Completo</label>
+                        <input id="register-name" type="text" placeholder="Afonso Silva" required class="w-full h-11 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Endereço de Email</label>
+                        <input id="register-email" type="email" placeholder="seunome@email.com" required class="w-full h-11 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Palavra-passe</label>
+                        <input id="register-password" type="password" placeholder="No mínimo 6 caracteres" required class="w-full h-11 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                    </div>
+                    <div class="flex items-start gap-2 py-2">
+                        <input type="checkbox" id="terms" required class="mt-1 rounded border-slate-300 text-emerald-600">
+                        <label for="terms" class="text-xs text-slate-500">Aceito os termos de serviço e a política de investimento da plataforma.</label>
+                    </div>
+                    <button type="submit" class="w-full h-11 bg-emerald-600 text-white font-semibold rounded-lg hover:bg-emerald-700 transition">Registar Conta</button>
+                </form>
+                <p class="text-center mt-6 text-sm text-slate-600">
+                    Já tem conta? <a href="#" onclick="showView('login')" class="text-emerald-600 font-medium hover:underline">Faça login</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- 4. USER DASHBOARD (DURANTE LOGIN SIMULADO) -->
+        <section id="view-dashboard" class="view-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <!-- Boas vindas -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold font-display text-slate-900">Olá, <span id="dash-user">Investidor</span>!</h2>
+                    <p class="text-slate-600 text-sm mt-1">Acompanhe a evolução e os rendimentos acumulados da sua carteira.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openModal('deposit')" class="px-4 py-2 bg-emerald-600 text-white text-sm font-semibold rounded-lg hover:bg-emerald-700 transition">Efectuar Depósito</button>
+                    <button onclick="openModal('withdraw')" class="px-4 py-2 bg-white border border-slate-200 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50 transition">Levantar Fundos</button>
+                </div>
+            </div>
+
+            <!-- Grid de Métricas principais -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <p class="text-xs font-semibold uppercase text-slate-500">Saldo Disponível</p>
+                    <p class="text-2xl font-bold font-display text-slate-900 mt-2">€<span id="meta-balance">1,450.00</span></p>
+                    <span class="text-xs text-emerald-600 font-medium mt-1 inline-block">● Disponível para levantar</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <p class="text-xs font-semibold uppercase text-slate-500">Em Investimento</p>
+                    <p class="text-2xl font-bold font-display text-slate-900 mt-2">€<span id="meta-invested">800.00</span></p>
+                    <span class="text-xs text-slate-500 inline-block mt-1">Em planos ativos</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <p class="text-xs font-semibold uppercase text-slate-500">Lucros Totais</p>
+                    <p class="text-2xl font-bold font-display text-emerald-650 mt-2">€<span id="meta-profits">125.40</span></p>
+                    <span class="text-xs text-emerald-600 inline-block mt-1">↑ + 15.6% este mês</span>
+                </div>
+                <div class="bg-white border border-slate-200 rounded-2xl p-5">
+                    <p class="text-xs font-semibold uppercase text-slate-500">Próximo Payout</p>
+                    <p id="countdown" class="text-2xl font-bold font-display text-amber-600 mt-2">18h 42m 10s</p>
+                    <span class="text-xs text-slate-500 inline-block mt-1">Rendimento diário automatizado</span>
+                </div>
+            </div>
+
+            <!-- Conteúdo Central: Histórico e Calculadora -->
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Histórico de Transações -->
+                <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 p-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4 font-display">Histórico de Transações</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="text-xs font-semibold uppercase text-slate-500 border-b border-slate-100">
+                                    <th class="py-3">Tipo / Descrição</th>
+                                    <th class="py-3">Valor</th>
+                                    <th class="py-3">Data</th>
+                                    <th class="py-3">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-table-body" class="text-sm divide-y divide-slate-100 text-slate-600">
+                                <!-- Transações serão inseridas via JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Calculadora de Rendimentos Interativa -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-6 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900 mb-2 font-display">Simular Rendimentos</h3>
+                        <p class="text-xs text-slate-500 mb-6">Veja quanto renderá sua aplicação diária com base no valor que pretende investir.</p>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Montante a Investir (€)</label>
+                                <input id="calc-amount" type="number" value="100" min="10" oninput="runSimulate()" class="w-full h-10 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Plano Pretendido</label>
+                                <select id="calc-plan" onchange="runSimulate()" class="w-full h-10 border border-slate-200 rounded-lg px-2 text-sm bg-white focus:ring-1 focus:ring-emerald-500 outline-none">
+                                    <option value="1.8">Bronze (1.8% Diário)</option>
+                                    <option value="2.2">Prata (2.2% Diário)</option>
+                                    <option value="2.7">Ouro (2.7% Diário)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 bg-slate-50 p-4 rounded-xl border border-slate-200/50 space-y-2">
+                        <div class="flex justify-between text-xs text-slate-500">
+                            <span>Retorno por Dia:</span>
+                            <span class="font-bold text-slate-700" id="res-daily">€1.80</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-slate-500">
+                            <span>Retorno Mensal (30 dias):</span>
+                            <span class="font-bold text-slate-700" id="res-monthly">€54.00</span>
+                        </div>
+                        <div class="border-t border-slate-200 pt-2 flex justify-between text-sm font-semibold text-slate-900">
+                            <span>Total Estimado:</span>
+                            <span class="text-emerald-650" id="res-total">€154.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-16 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">A</div>
+                <span class="text-sm font-semibold text-white">Agelga</span>
+            </div>
+            <p class="text-xs">© 2026 Agelga Inc. Todos os direitos reservados. Licenciado para transações digitais rápidas.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DE DEPÓSITO SIMULADO -->
+    <div id="modal-deposit" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 m-4 shadow-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-950 font-display mb-2">Simular Depósito</h3>
+            <p class="text-xs text-slate-500 mb-6">Registe um novo depósito na conta para aprovação do administrador.</p>
+            
+            <form onsubmit="handleFormDeposit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Montante (€)</label>
+                    <input id="deposit-amount" type="number" min="10" placeholder="Ex: 250" required class="w-full h-10 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Upload do Comprovativo fictício (.png)</label>
+                    <div class="border-2 border-dashed border-slate-200 rounded-lg p-4 text-center cursor-pointer hover:border-emerald-550 transition" onclick="document.getElementById('file-upload').click()">
+                        <span class="text-xs text-slate-500">Clique para selecionar comprovativo</span>
+                        <input id="file-upload" type="file" required class="hidden">
+                    </div>
+                </div>
+                <div class="flex gap-2 pt-4">
+                    <button type="button" onclick="closeModal('deposit')" class="w-1/2 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50 transition">Cancelar</button>
+                    <button type="submit" class="w-1/2 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE LEVANTAMENTO SIMULADO -->
+    <div id="modal-withdraw" class="fixed inset-0 bg-slate-950/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 m-4 shadow-xl border border-slate-200">
+            <h3 class="text-lg font-bold text-slate-950 font-display mb-2">Efectuar Levantamento</h3>
+            <p class="text-xs text-slate-500 mb-6">Solicite a transferência dos seus lucros para a sua conta.</p>
+            
+            <form onsubmit="handleFormWithdraw(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Montante (€)</label>
+                    <input id="withdraw-amount" type="number" min="10" placeholder="Ex: 50" required class="w-full h-10 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Código IBAN para Recebimento</label>
+                    <input type="text" placeholder="PT50 0000 0000 1234 5678 9" required class="w-full h-10 border border-slate-200 rounded-lg px-3 text-sm focus:ring-1 focus:ring-emerald-500 outline-none">
+                </div>
+                <div class="flex gap-2 pt-4">
+                    <button type="button" onclick="closeModal('withdraw')" class="w-1/2 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50 transition">Cancelar</button>
+                    <button type="submit" class="w-1/2 py-2 bg-emerald-600 text-white rounded-lg text-sm font-semibold hover:bg-emerald-700 transition">Efectuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Lógico Interno do Protótipo -->
+    <script>
+        // Bases de Dados em Memória (Simulação)
+        let currentUser = null;
+        let userBalance = 1450.00;
+        let investedSum = 800.00;
+        let cumulativeEarnings = 125.40;
+
+        let transactions = [
+            { type: 'Depósito', amount: 500, date: '2026-06-12', status: 'Concluído' },
+            { type: 'Depósito', amount: 300, date: '2026-06-10', status: 'Concluído' },
+            { type: 'Rendimento Plano Ouro', amount: 27, date: '2026-06-15', status: 'Concluído' },
+            { type: 'Levantamento', amount: 150, date: '2026-06-14', status: 'Pendente' }
+        ];
+
+        // Roteador de Abas de Visualização (SPA)
+        function showView(viewName) {
+            document.querySelectorAll('.view-section').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+            document.getElementById(`view-${viewName}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Sistema de Toasts (Notificações Flutuantes)
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `p-4 rounded-xl shadow-lg border text-sm font-medium transition duration-300 transform translate-y-2 pointer-events-auto flex items-center gap-2 ${
+                type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-800' : 'bg-red-50 border-red-200 text-red-800'
+            }`;
+            toast.innerHTML = `
+                <span>${type === 'success' ? '✔️' : '❌'}</span>
+                <span>${message}</span>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2');
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // Lógica de Cadastro Simulada
+        function handleRegister(e) {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            
+            showToast(`Conta criada com sucesso para ${name}!`, 'success');
+            setTimeout(() => {
+                showView('login');
+                document.getElementById('login-email').value = email;
+            }, 1000);
+        }
+
+        // Lógica de Login Simulada
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            currentUser = email.split('@')[0];
+            
+            // Alterar componentes visuais
+            document.getElementById('auth-buttons').classList.add('hidden');
+            document.getElementById('user-profile').classList.remove('hidden');
+            document.getElementById('user-display-name').innerText = currentUser.charAt(0).toUpperCase() + currentUser.slice(1);
+            
+            document.getElementById('dash-user').innerText = currentUser.charAt(0).toUpperCase() + currentUser.slice(1);
+
+            renderTransactions();
+            runSimulate();
+            showToast('Bem-vindo ao Painel Agelga!', 'success');
+            showView('dashboard');
+        }
+
+        // Lógica de Terminar Sessão
+        function handleLogout() {
+            currentUser = null;
+            document.getElementById('auth-buttons').classList.remove('hidden');
+            document.getElementById('user-profile').classList.add('hidden');
+            showToast('Sessão terminada com sucesso.', 'success');
+            showView('home');
+        }
+
+        // Renderizador de Transações Dinâmico
+        function renderTransactions() {
+            const tbody = document.getElementById('transaction-table-body');
+            tbody.innerHTML = '';
+            
+            transactions.forEach(t => {
+                const statusColor = t.status === 'Concluído' ? 'bg-emerald-50 text-emerald-700' : 'bg-amber-50 text-amber-700';
+                
+                const tr = document.createElement('tr');
+                tr.className = 'border-b border-slate-100 hover:bg-slate-50/50';
+                tr.innerHTML = `
+                    <td class="py-3 px-1 font-semibold text-slate-800">${t.type}</td>
+                    <td class="py-3 px-1 font-medium ${t.type.includes('Levantamento') ? 'text-red-600' : 'text-emerald-600'}">€${t.amount.toFixed(2)}</td>
+                    <td class="py-3 px-1 text-slate-500">${t.date}</td>
+                    <td class="py-3 px-1">
+                        <span class="inline-flex px-2 py-0.5 rounded text-xs font-bold ${statusColor}">${t.status}</span>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Simulação da Calculadora
+        function runSimulate() {
+            const amount = parseFloat(document.getElementById('calc-amount').value) || 0;
+            const rate = parseFloat(document.getElementById('calc-plan').value);
+            
+            const daily = amount * (rate / 100);
+            const monthly = daily * 30;
+            const total = amount + monthly;
+            
+            document.getElementById('res-daily').innerText = `€${daily.toFixed(2)}`;
+            document.getElementById('res-monthly').innerText = `€${monthly.toFixed(2)}`;
+            document.getElementById('res-total').innerText = `€${total.toFixed(2)}`;
+        }
+
+        // Controladores de Modais
+        function openModal(type) {
+            document.getElementById(`modal-${type}`).classList.remove('hidden');
+        }
+        function closeModal(type) {
+            document.getElementById(`modal-${type}`).classList.add('hidden');
+        }
+
+        // Submissão de Depósito fictícia
+        function handleFormDeposit(e) {
+            e.preventDefault();
+            const val = parseFloat(document.getElementById('deposit-amount').value);
+            
+            transactions.unshift({
+                type: 'Depósito Simulado',
+                amount: val,
+                date: new Date().toISOString().split('T')[0],
+                status: 'Pendente'
+            });
+            
+            closeModal('deposit');
+            renderTransactions();
+            showToast('O comprovativo enviado entrou em análise da administração!', 'success');
+        }
+
+        // Submissão de Levantamento fictício
+        function handleFormWithdraw(e) {
+            e.preventDefault();
+            const val = parseFloat(document.getElementById('withdraw-amount').value);
+            
+            if (val > userBalance) {
+                showToast('Saldo insuficiente para esta transação!', 'error');
+                return;
+            }
+            
+            userBalance -= val;
+            document.getElementById('meta-balance').innerText = userBalance.toFixed(2);
+            
+            transactions.unshift({
+                type: 'Levantamento',
+                amount: val,
+                date: new Date().toISOString().split('T')[0],
+                status: 'Pendente'
+            });
+            
+            closeModal('withdraw');
+            renderTransactions();
+            showToast('O levantamento foi colocado em fila de aprovação automática!', 'success');
+        }
+
+        // Temporizador de Rendimento Diário Regressivo Realista
+        function startCountdown() {
+            let hours = 18, minutes = 42, seconds = 10;
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) { seconds = 59; minutes--; }
+                if (minutes < 0) { minutes = 59; hours--; }
+                if (hours < 0) { hours = 23; }
+                
+                document.getElementById('countdown').innerText = 
+                    `${hours}h ${minutes}m ${seconds}s`;
+            }, 1000);
+        }
+        startCountdown();
+    </script>
+</body>
+</html>
